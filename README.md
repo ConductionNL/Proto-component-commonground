@@ -7,6 +7,12 @@ This "proto" component provides a plug and play solution for component generatio
 
 For that we use **[Api Platform](https://api-platform.com)**, a next-generation web framework designed to easily create API-first projects, without compromising extensibility and flexibility. 
 
+## Badges
+-------
+Just look at all the shiny badges that we have!
+![Repo Status](https://img.shields.io/badge/status-concept-lightgrey.svg?style=plastic)
+![Repo Status](https://travis-ci.org/ConductionNL/Proto-component-commonground.svg?branch=master)
+
 ## Features
 -------
 API Platform embraces open web standards (OpenAPI, JSON-LD, GraphQL, Hydra, HAL, JSONAPI, JWT, OAuth, HTTP...) and the [Linked Data](https://www.w3.org/standards/semanticweb/data) movement. Your API will automatically expose structured data in Schema.org/JSON-LD.
