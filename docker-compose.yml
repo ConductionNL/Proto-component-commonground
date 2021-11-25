@@ -13,6 +13,7 @@ services:
   php:
     &php
     image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-php:${APP_ENV}
+    user: "1000"
     build:
       context: ./api
       target: api_platform_php
@@ -24,7 +25,7 @@ services:
       - ./nlx-setup:/cert:rw,cached
       #- ./nlx-setup:/Users/<your-username>/nlx-setup:rw,cached
       # If you develop on Linux, uncomment the following line to use a bind-mounted host directory instead
-      # - ./api/var:/srv/api/var:rw
+      - ./api/var:/srv/api/var:rw
     environment:
       - CONTAINER_REGISTRY_BASE=${CONTAINER_REGISTRY_BASE}
       - CONTAINER_PROJECT_NAME=${CONTAINER_PROJECT_NAME}

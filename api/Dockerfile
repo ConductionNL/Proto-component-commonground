@@ -31,6 +31,8 @@ RUN apk add --no-cache ca-certificates bash git openssh curl \
     && wget -q https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm
 
+
+
 # persistent / runtime deps
 RUN apk add --no-cache \
 		acl \
@@ -87,7 +89,7 @@ RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 COPY docker/php/conf.d/api-platform.ini $PHP_INI_DIR/conf.d/api-platform.ini
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
-ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_ALLOW_SUPERUSER=0
 # install Symfony Flex globally to speed up download of Composer packages (parallelized prefetching)
 RUN set -eux; \
 	composer global require "symfony/flex" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
@@ -128,6 +130,10 @@ VOLUME /srv/api/var
 
 COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
+
+RUN chmod 777 -R ${PHP_INI_DIR};\
+    chown 1000 /srv/api/var; \
+    chmod 777 -R /srv/api/var
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
